@@ -509,7 +509,7 @@ if __name__ == '__main__':
     acqChannels = [0,3]
     samplingRate = 1000
     nSamples = 10
-    digitalOutput = [0,0,1,1]
+    digitalOutput = [1,1]
     
     # Connect to BITalino
     device = BITalino(macAddress)

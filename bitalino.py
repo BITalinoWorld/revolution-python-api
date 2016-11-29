@@ -504,9 +504,10 @@ class BITalino(object):
             
 if __name__ == '__main__':
     macAddress = "00:00:00:00:00:00"
+    running_time = 5
     
     batteryThreshold = 30
-    acqChannels = [0,3]
+    acqChannels = [0, 1, 2, 3, 4, 5]
     samplingRate = 1000
     nSamples = 10
     digitalOutput = [1,1]
@@ -523,8 +524,12 @@ if __name__ == '__main__':
     # Start Acquisition
     device.start(samplingRate, acqChannels)
 
-    # Read samples
-    print device.read(nSamples)
+    start = time.time()
+    end = time.time()
+    while (end - start) < running_time:
+        # Read samples
+        print device.read(nSamples)
+        end = time.time()
 
     # Turn BITalino led on
     device.trigger(digitalOutput)

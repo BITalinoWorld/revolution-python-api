@@ -13,7 +13,7 @@ def readme():
 
 
 setup(
-    name="bitalino_teste",
+    name="bitalino",
     version="1.0",
     author="BITalinoWorld",
     author_email="bitalino@plux.info",

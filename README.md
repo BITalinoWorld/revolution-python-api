@@ -1,5 +1,5 @@
-# BITalino ( R )evolution Python API
-The BITalino ( R )evolution Python API provides the needed tools to interact with BITalino ( R )evolution using Python.
+# BITalino (r)evolution Python API
+The BITalino (r)evolution Python API provides the needed tools to interact with BITalino (r)evolution using Python.
 
 ## Dependencies
 * [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads)

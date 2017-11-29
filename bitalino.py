@@ -12,6 +12,7 @@ import platform
 import math
 import numpy
 import re
+import socket
 import serial
 import struct
 import time
@@ -58,6 +59,7 @@ class BITalino(object):
     
     * MAC address: e.g. ``00:0a:95:9d:68:16``
     * Serial port - device name: depending on the operating system. e.g. ``COM3`` on Windows; ``/dev/tty.bitalino-DevB`` on Mac OS X; ``/dev/ttyUSB0`` on GNU/Linux.
+    * IP address and port - server: e.g. ``192.168.4.1:8001``
     
     Possible values for *timeout*:
     
@@ -85,12 +87,19 @@ class BITalino(object):
                     raise Exception(ExceptionCode.IMPORT_FAILED + str(e))
                 self.socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
                 self.socket.connect((macAddress, 1))
+                self.wifi = False
                 self.serial = False     
             else:
                 raise Exception(ExceptionCode.INVALID_PLATFORM)
         elif (macAddress[0:3] == 'COM' and platform.system() == 'Windows') or (macAddress[0:5] == '/dev/' and platform.system() != 'Windows'):
             self.socket = serial.Serial(macAddress, 115200)
+            self.wifi = False
             self.serial = True
+        elif (macAddress.count(':') == 1):
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket.connect((macAddress.split(':')[0], int(macAddress.split(':')[1])))
+            self.wifi = True
+            self.serial = False
         else:
             raise Exception(ExceptionCode.INVALID_ADDRESS)
         self.started = False
@@ -197,8 +206,18 @@ class BITalino(object):
         """
         Closes the bluetooth or serial port socket.
         """
-        self.socket.close()
-    
+        if self.wifi:
+            self.socket.settimeout(1.0)  # force a timeout on TCP/IP sockets
+            try:
+                self.receive(1024)  # receive any pending data
+                self.socket.shutdown(socket.SHUT_RDWR)
+                self.socket.close()
+            except socket.timeout:
+                self.socket.shutdown(socket.SHUT_RDWR)
+                self.socket.close()
+        else:
+            self.socket.close()
+
     def send(self, data):
         """
         Sends a command to the BITalino device.

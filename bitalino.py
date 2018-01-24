@@ -17,6 +17,7 @@ import serial
 import struct
 import time
 import select
+from __future__ import print_function
 
 def find():
     """
@@ -535,7 +536,7 @@ if __name__ == '__main__':
     device = BITalino(macAddress)
 
     # Set battery threshold
-    print device.battery(batteryThreshold)
+    print(device.battery(batteryThreshold))
     
     # Read BITalino version
     device.version()
@@ -547,7 +548,7 @@ if __name__ == '__main__':
     end = time.time()
     while (end - start) < running_time:
         # Read samples
-        print device.read(nSamples)
+        print(device.read(nSamples))
         end = time.time()
 
     # Turn BITalino led on

@@ -8,6 +8,7 @@
 *Last Modified on Thur Jun 25 2015*
 """
 
+from __future__ import print_function
 import platform
 import math
 import numpy
@@ -15,9 +16,9 @@ import re
 import socket
 import serial
 import struct
+import sys
 import time
 import select
-from __future__ import print_function
 
 def find():
     """
@@ -225,9 +226,15 @@ class BITalino(object):
         """
         time.sleep(0.1)
         if self.serial:
-            self.socket.write(chr(data))
+            if sys.version_info[0] > 2:
+                self.socket.write(bytes([data]))
+            else:
+                self.socket.write(chr(data))
         else:
-            self.socket.send(chr(data))
+            if sys.version_info[0] > 2:
+                self.socket.send(chr(data).encode())
+            else:
+                self.socket.send(chr(data))
     
     def battery(self, value=0):
         """
@@ -483,12 +490,20 @@ class BITalino(object):
         if (self.started == False):
             # CommandVersion: 0  0  0  0  0  1  1  1
             self.send(7)
-            version_str = ''
-            while True: 
-                version_str += self.receive(1)
-                if version_str[-1] == '\n' and 'BITalino' in version_str:
-                    break
-            return version_str[version_str.index("BITalino"):-1]
+            if sys.version_info[0] > 2:
+                version_str = b''
+                while True:
+                    version_str += self.receive(1)
+                    if version_str[-1] == 10 and b'BITalino' in version_str:
+                        break
+                return version_str[version_str.index(b"BITalino"):-1].decode()
+            else:
+                version_str = ''
+                while True:
+                    version_str += self.receive(1)
+                    if version_str[-1] == '\n' and 'BITalino' in version_str:
+                        break
+                return version_str[version_str.index("BITalino"):-1]
         else:
             raise Exception(ExceptionCode.DEVICE_NOT_IDLE) 
     
@@ -501,7 +516,10 @@ class BITalino(object):
         
         Retrieves `nbytes` from the BITalino device and returns it as a string pack with length of `nbytes`. The timeout is defined on instantiation.
         """
-        data = ''
+        if sys.version_info[0] > 2:
+            data = b''
+        else:
+            data = ''
         if self.serial:
             while len(data) < nbytes:
                 if not self.blocking:

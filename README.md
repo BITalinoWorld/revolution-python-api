@@ -5,7 +5,7 @@ The BITalino (r)evolution Python API provides the needed tools to interact with 
 * [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads)
 * [NumPy](https://pypi.python.org/pypi/numpy)
 * [pySerial](https://pypi.python.org/pypi/pyserial)
-* [pyBluez](https://pypi.python.org/pypi/PyBluez/) (Not needed for macos)
+* [pyBluez](https://pypi.python.org/pypi/PyBluez/) (Not needed for Mac OS)
 
 ## Installation
 ~~~

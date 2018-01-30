@@ -16,7 +16,7 @@ pip install bitalino
 ~~~python
 # This example will collect data for 5 sec.
 macAddress = "00:00:00:00:00:00"   
-# macAddress = "/dev/tty.BITalino-XX-XX-DevB" on Mac OS replace XX-XX by the 4 final digits of the MAC address
+# macAddress = "/dev/tty.BITalino-XX-XX-DevB" # on Mac OS replace XX-XX by the 4 final digits of the MAC address
 running_time = 5
     
 batteryThreshold = 30

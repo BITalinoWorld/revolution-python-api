@@ -5,7 +5,7 @@ The BITalino (r)evolution Python API provides the needed tools to interact with 
 * [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads)
 * [NumPy](https://pypi.python.org/pypi/numpy)
 * [pySerial](https://pypi.python.org/pypi/pyserial)
-* [pyBluez](https://pypi.python.org/pypi/PyBluez/)
+* [pyBluez](https://pypi.python.org/pypi/PyBluez/) (Not needed for macos)
 
 ## Installation
 ~~~
@@ -15,7 +15,8 @@ pip install bitalino
 ## Example
 ~~~python
 # This example will collect data for 5 sec.
-macAddress = "00:00:00:00:00:00"
+macAddress = "00:00:00:00:00:00"   
+# macAddress = "/dev/tty.BITalino-XX-XX-DevB"  on macos substitute XX-XX by the 4 final numbers of the macaddress
 running_time = 5
     
 batteryThreshold = 30

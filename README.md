@@ -12,6 +12,9 @@ The BITalino (r)evolution Python API provides the needed tools to interact with 
 pip install bitalino
 ~~~
 
+## Documentation
+http://bitalino.com/pyAPI/
+
 ## Example
 ~~~python
 # This example will collect data for 5 sec.

@@ -32,10 +32,10 @@ digitalOutput = [1,1]
 device = BITalino(macAddress)
 
 # Set battery threshold
-print device.battery(batteryThreshold)
+device.battery(batteryThreshold)
 
 # Read BITalino version
-device.version()
+print(device.version())
     
 # Start Acquisition
 device.start(samplingRate, acqChannels)

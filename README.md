@@ -44,7 +44,7 @@ start = time.time()
 end = time.time()
 while (end - start) < running_time:
     # Read samples
-    print device.read(nSamples)
+    print(device.read(nSamples))
     end = time.time()
 
 # Turn BITalino led on

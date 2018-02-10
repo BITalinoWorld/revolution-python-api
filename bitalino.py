@@ -535,10 +535,10 @@ if __name__ == '__main__':
     device = BITalino(macAddress)
 
     # Set battery threshold
-    print(device.battery(batteryThreshold))
+    device.battery(batteryThreshold)
     
     # Read BITalino version
-    device.version()
+    print(device.version())
         
     # Start Acquisition
     device.start(samplingRate, acqChannels)

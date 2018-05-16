@@ -7,6 +7,13 @@
 
 *Last Modified on Thur Jun 25 2015*
 """
+__author__ = "Pedro Gonçalves & Carlos Azevedo"
+__credits__ = ["Carlos Azevedo", "Pedro Gonçalves", "Hugo Silva",
+                    "Takuma Hashimoto", "Rui Freixo", "Margarida Reis"]
+__license__ = "GPL"
+__version__ = "v3"
+__email__ = "bitalino@plux.info"
+
 
 import platform
 import math

@@ -7,7 +7,7 @@ Setup for package installation.
 from setuptools import setup
 
 def readme():
-    with open('README.rst', 'r') as f:
+    with open('README.md', 'r') as f:
         description = f.read()
     return description
 

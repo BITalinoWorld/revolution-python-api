@@ -445,7 +445,7 @@ class BITalino(object):
             dataAcquired = numpy.zeros((nSamples, 5 + nChannels))
             for sample in range(nSamples):
                 Data = self.receive(number_bytes)
-                decodedData = list(struct.unpack(number_bytes*"B ", Data))
+                decodedData = list(struct.unpack(number_bytes*"B ", bytes(Data,'latin1')))
                 crc = decodedData[-1] & 0x0F
                 decodedData[-1] = decodedData[-1] & 0xF0
                 x = 0
@@ -516,7 +516,7 @@ class BITalino(object):
                         finTime = time.time()
                         if (finTime - initTime) > self.timeout:
                             raise Exception(ExceptionCode.CONTACTING_DEVICE) 
-                data += self.socket.read(1)
+                data += self.socket.read(1).decode('latin1')
         else:
             while len(data) < nbytes:
                 if not self.blocking:
@@ -525,11 +525,12 @@ class BITalino(object):
                         pass
                     else:
                         raise Exception(ExceptionCode.CONTACTING_DEVICE)
-                data += self.socket.recv(1)      
+                data += self.socket.recv(1).decode('latin1')      
         return data
             
 if __name__ == '__main__':
     macAddress = "00:00:00:00:00:00"
+
     running_time = 5
     
     batteryThreshold = 30

@@ -24,6 +24,7 @@ import serial
 import struct
 import time
 import select
+import sys
 
 def find():
     """
@@ -78,8 +79,9 @@ class BITalino(object):
     ===============  ================================================================
     """
     def __init__(self, macAddress, timeout = None):
-        regCompiled = re.compile('^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$');
-        checkMatch = re.match(regCompiled, macAddress);
+        regCompiled = re.compile('^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$')
+        checkMatch = re.match(regCompiled, macAddress)
+        self.isPython2 = True if sys.version_info[0] == 2 else False
         self.blocking = True if timeout == None else False
         if not self.blocking:
             try:
@@ -119,7 +121,7 @@ class BITalino(object):
         else:
             version_nbr = float(version.split(split_string_old)[1][:3])
         self.isBitalino2 = True if version_nbr >= 4.2 else False
-    
+
     def start(self, SamplingRate = 1000, analogChannels = [0, 1, 2, 3, 4, 5]):
         """
         :param SamplingRate: sampling frequency (Hz)
@@ -178,7 +180,7 @@ class BITalino(object):
             
             if len(analogChannels) == 0 or len(analogChannels) > 6 or any([item not in range(6) or type(item)!=int for item in analogChannels]):
                 raise Exception(ExceptionCode.INVALID_PARAMETER)
-            
+
             self.send((commandSRate << 6)| 0x03)
             
             # CommandStart: A6 A5 A4 A3 A2 A1 0  1
@@ -207,7 +209,6 @@ class BITalino(object):
             else:
                 raise Exception(ExceptionCode.DEVICE_NOT_IN_ACQUISITION)
         self.started = False
-        self.version()
     
     def close(self):
         """
@@ -231,9 +232,15 @@ class BITalino(object):
         """
         time.sleep(0.1)
         if self.serial:
-            self.socket.write(chr(data))
+            if self.isPython2:
+                self.socket.write(chr(data))
+            else:
+                self.socket.write(bytes([data]))
         else:
-            self.socket.send(chr(data))
+            if self.isPython2:
+                self.socket.send(chr(data))
+            else:
+                self.socket.send(bytes([data]))
     
     def battery(self, value=0):
         """
@@ -445,7 +452,7 @@ class BITalino(object):
             dataAcquired = numpy.zeros((nSamples, 5 + nChannels))
             for sample in range(nSamples):
                 Data = self.receive(number_bytes)
-                decodedData = list(struct.unpack(number_bytes*"B ", bytes(Data,'latin1')))
+                decodedData = list(struct.unpack(number_bytes * "B ", Data))
                 crc = decodedData[-1] & 0x0F
                 decodedData[-1] = decodedData[-1] & 0xF0
                 x = 0
@@ -490,8 +497,11 @@ class BITalino(object):
             # CommandVersion: 0  0  0  0  0  1  1  1
             self.send(7)
             version_str = ''
-            while True: 
-                version_str += self.receive(1)
+            while True:
+                if self.isPython2:
+                    version_str += self.receive(1)
+                else:
+                    version_str += self.receive(1).decode('utf-8')
                 if version_str[-1] == '\n' and 'BITalino' in version_str:
                     break
             return version_str[version_str.index("BITalino"):-1]
@@ -507,7 +517,10 @@ class BITalino(object):
         
         Retrieves `nbytes` from the BITalino device and returns it as a string pack with length of `nbytes`. The timeout is defined on instantiation.
         """
-        data = ''
+        if self.isPython2:
+            data = ''
+        else:
+            data = b''
         if self.serial:
             while len(data) < nbytes:
                 if not self.blocking:
@@ -516,7 +529,7 @@ class BITalino(object):
                         finTime = time.time()
                         if (finTime - initTime) > self.timeout:
                             raise Exception(ExceptionCode.CONTACTING_DEVICE) 
-                data += self.socket.read(1).decode('latin1')
+                data += self.socket.read(1)
         else:
             while len(data) < nbytes:
                 if not self.blocking:
@@ -525,7 +538,7 @@ class BITalino(object):
                         pass
                     else:
                         raise Exception(ExceptionCode.CONTACTING_DEVICE)
-                data += self.socket.recv(1).decode('latin1')      
+                data += self.socket.recv(1)
         return data
             
 if __name__ == '__main__':

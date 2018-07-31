@@ -14,7 +14,7 @@ def readme():
 
 setup(
     name="bitalino",
-    version="1.0",
+    version="1.2",
     author="BITalinoWorld",
     author_email="bitalino@plux.info",
     url="http://www.bitalino.com/",

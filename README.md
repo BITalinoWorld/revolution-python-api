@@ -2,7 +2,7 @@
 The BITalino (r)evolution Python API provides the needed tools to interact with BITalino (r)evolution using Python.
 
 ## Dependencies
-* [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads)
+* [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads) or [Python 3.4](https://www.python.org/downloads/)
 * [NumPy](https://pypi.python.org/pypi/numpy)
 * [pySerial](https://pypi.python.org/pypi/pyserial)
 * [pyBluez](https://pypi.python.org/pypi/PyBluez/) (Not needed for Mac OS)

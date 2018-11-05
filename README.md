@@ -17,9 +17,14 @@ http://bitalino.com/pyAPI/
 
 ## Example
 ~~~python
+import time
+from bitalino import BITalino
+
+# The macAddress variable on Windows can be "XX:XX:XX:XX:XX:XX" or "COMX"
+# while on Mac OS can be "/dev/tty.BITalino-XX-XX-DevB" for devices ending with the last 4 digits of the MAC address or "/dev/tty.BITalino-DevB" for the remaining
+macAddress = "00:00:00:00:00:00"
+
 # This example will collect data for 5 sec.
-macAddress = "00:00:00:00:00:00"   
-# macAddress = "/dev/tty.BITalino-XX-XX-DevB" # on Mac OS replace XX-XX by the 4 final digits of the MAC address
 running_time = 5
     
 batteryThreshold = 30

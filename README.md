@@ -8,6 +8,61 @@ The BITalino (r)evolution Python API provides the needed tools to interact with 
 * [pyBluez](https://pypi.python.org/pypi/PyBluez/) (Not needed for Mac OS)
 
 ## Installation
+1. Install Dependencies
+* **NumPy**
+~~~
+pip install numpy
+~~~
+
+* **pySerial**
+~~~
+pip install pyserial
+~~~
+
+* **PyBluez**
+~~~
+pip install PyBluez
+~~~
+
+2. Install **bitalino** API package
+~~~
+pip install bitalino
+~~~
+
+## Installation Windows 10 \[Python 3.x]
+For **Windows 10** the installation procedure is slightly different, including some additional steps that will be presented on the following topics (required by **PyBluez** package):
+1. Install Dependencies
+* **NumPy**
+~~~
+pip install numpy
+~~~
+
+* **pySerial**
+~~~
+pip install pyserial
+~~~
+
+2. Download and start the installation of Visual Studio 2015 ([https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409))
+
+3. During the installation select the "Custom" option
+
+![Selection of Custom Option](https://i.postimg.cc/vTcMxjpy/git-part1.png)
+
+4. On the new screen, select some additional functionalities required for **pyBluez** installation, namely:
+* Visual C++
+* Python Tools for Visual Studio
+* Windows 10 SDK
+
+![Selection of Tools](https://i.postimg.cc/qqSrswT3/git-part2.png)
+
+5. After ending step 4 you will be able to install **PyBluez**
+
+* **PyBluez-win10**
+~~~
+pip install PyBluez-win10
+~~~
+
+6. Install **bitalino** API package
 ~~~
 pip install bitalino
 ~~~

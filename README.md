@@ -21,7 +21,7 @@ pip install pyserial
 
 * **PyBluez** *\[Only on Windows]*
 
-Before installing **PyBluez** some requirements should be fulfilled. For a straightforward installation please check the auxiliary section: [**Prepare PyBluez Installation on Windows 10**](#Prepare%20PyBluez%20Installation%20on%20Windows%2010)
+Before installing **PyBluez** some requirements should be fulfilled. For a straightforward installation please check the auxiliary section: [**Prepare PyBluez Installation on Windows 10**](#prepare-pybluez-installation-on-windows-10)
 ~~~
 pip install PyBluez
 ~~~

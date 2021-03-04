@@ -23,7 +23,7 @@ pip install pyserial
 
 Before installing **PyBluez** some requirements should be fulfilled. For a straightforward installation please check the auxiliary section: [**Prepare PyBluez Installation on Windows 10**](#prepare-pybluez-installation-on-windows-10)
 ~~~
-pip install PyBluez
+pip install pybluez2
 ~~~
 
 2. Install **bitalino** API package

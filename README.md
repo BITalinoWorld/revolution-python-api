@@ -2,7 +2,7 @@
 The BITalino (r)evolution Python API provides the needed tools to interact with BITalino (r)evolution using Python.
 
 ## Dependencies
-* [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads) or [Python 3.4](https://www.python.org/downloads/)
+* [Python >2.7](https://www.python.org/downloads/) or [Anaconda](https://www.continuum.io/downloads) or [Python 3.4 -> 3.7](https://www.python.org/downloads/)
 * [NumPy](https://pypi.python.org/pypi/numpy)
 * [pySerial](https://pypi.python.org/pypi/pyserial)
 * [PyBluez](https://pypi.python.org/pypi/PyBluez/) (Not needed for Mac OS)
@@ -84,6 +84,8 @@ device.close()
 For **Windows 10** the **PyBluez** installation procedure requires some particular steps that will be presented on the following topics (tested procedure on **\[Python 3.x]**):
 
 1. Download and start the installation of Visual Studio 2015 ([https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409))
+
+> If using an older **Python** version (3.4 or lower), the **PyBluez** installation may be successful with a previous version of **Visual Studio** ([PyBluez Install Guidelines](https://pybluez.readthedocs.io/en/latest/user/install.html)).
 
 2. During the installation select the "Custom" option
 

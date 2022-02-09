@@ -100,10 +100,16 @@ For **Windows 10** the **PyBluez** installation procedure requires some particul
 
 4. After ending step 3 you will be able to install **PyBluez**
 
-* **PyBluez-win10**
+* **PyBluez**
 ~~~
-pip install PyBluez-win10
+pip install PyBluez
 ~~~
+
+> :warning: If the direct **pip** installation is not completed with success, the following workaround can be applied:
+> 
+
+https://user-images.githubusercontent.com/49654007/153283825-9ddc5004-0a27-4167-91c3-556be80cffb5.mp4
+
 
 ## License
 This project is licensed under the [GNU GPL v3](LICENSE.md)

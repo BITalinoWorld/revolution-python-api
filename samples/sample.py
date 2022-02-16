@@ -13,7 +13,8 @@ batteryThreshold = 30
 acqChannels = [0, 1, 2, 3, 4, 5]
 samplingRate = 1000
 nSamples = 10
-digitalOutput = [1, 1]
+digitalOutput_on = [1, 1]
+digitalOutput_off = [0, 0]
 
 # Connect to BITalino
 device = BITalino(macAddress)
@@ -34,8 +35,14 @@ while (end - start) < running_time:
     print(device.read(nSamples))
     end = time.time()
 
-# Turn BITalino led on
-device.trigger(digitalOutput)
+# Turn BITalino led and buzzer on
+device.trigger(digitalOutput_on)
+
+# Script sleeps for n seconds
+time.sleep(running_time)
+
+# Turn BITalino led and buzzer off
+device.trigger(digitalOutput_off)
 
 # Stop acquisition
 device.stop()

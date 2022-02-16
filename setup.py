@@ -44,7 +44,6 @@ setup(
     install_requires=[
         "numpy==1.21.5",
         "pyserial==3.5",
-        "pybluez @ git+https://github.com/pybluez/pybluez",
     ],
     zip_safe=False,
 )

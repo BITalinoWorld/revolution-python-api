@@ -44,6 +44,7 @@ setup(
     install_requires=[
         "numpy==1.21.5",
         "pyserial==3.5",
+        "PyBluez-bitalino==0.30",
     ],
     zip_safe=False,
 )

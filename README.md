@@ -9,12 +9,6 @@ The BITalino (r)evolution Python API provides the needed tools to interact with 
 - [pySerial](https://github.com/pyserial/pyserial)
 - [PyBluez](https://github.com/pybluez/pybluez) (Not needed for macOS)
 
-  - :warning: PyBluez is required to be install manually using the following command:
-
-    ```winbatch
-    pip install git+https://github.com/pybluez/pybluez.git
-    ```
-
 ## Installation
 
 Install [**bitalino**](https://pypi.org/project/bitalino/) API package from PyPI:

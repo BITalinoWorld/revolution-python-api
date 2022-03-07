@@ -134,6 +134,7 @@ class BITalino(object):
         else:
             version_nbr = float(version.split(split_string_old)[1][:3])
         self.isBitalino2 = True if version_nbr >= 4.2 else False
+        self.isBitalino52 = True if version_nbr >= 5.2 else False
 
     def start(self, SamplingRate=1000, analogChannels=[0, 1, 2, 3, 4, 5]):
         """
@@ -335,7 +336,10 @@ class BITalino(object):
                 #           <Battery threshold (1 byte: 0..63)>
                 #           <Digital ports + CRC (1 byte: I1 I2 O1 O2 <CRC 4-bit>)>
                 self.send(11)
-                number_bytes = 16
+                if self.isBitalino52:
+                    number_bytes = 17
+                else:
+                    number_bytes = 16
                 Data = self.receive(number_bytes)
                 decodedData = list(struct.unpack(number_bytes * "B ", Data))
                 crc = decodedData[-1] & 0x0F

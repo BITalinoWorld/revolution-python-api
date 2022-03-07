@@ -20,7 +20,7 @@ def readme():
 
 setup(
     name="bitalino",
-    version="1.2.4",
+    version="1.2.5",
     author="BITalinoWorld",
     author_email="bitalino@plux.info",
     url="http://www.bitalino.com/",
@@ -42,7 +42,7 @@ setup(
     keywords="BITalino, Physiological Computing, Biosignal, Physiological Signal",
     python_requires=">=3.7",
     install_requires=[
-        "numpy==1.21.5",
+        "numpy==1.22.2",
         "pyserial==3.5",
         "PyBluez-bitalino==0.30",
     ],

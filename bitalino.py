@@ -357,14 +357,17 @@ class BITalino(object):
                     digitalPorts.append(decodedData[-1] >> 6 & 0x01)
                     digitalPorts.append(decodedData[-1] >> 5 & 0x01)
                     digitalPorts.append(decodedData[-1] >> 4 & 0x01)
-                    batteryThreshold = decodedData[-2]
-                    battery = decodedData[-3] << 8 | decodedData[-4]
-                    A6 = decodedData[-5] << 8 | decodedData[-6]
-                    A5 = decodedData[-7] << 8 | decodedData[-8]
-                    A4 = decodedData[-9] << 8 | decodedData[-10]
-                    A3 = decodedData[-11] << 8 | decodedData[-12]
-                    A2 = decodedData[-13] << 8 | decodedData[-14]
-                    A1 = decodedData[-15] << 8 | decodedData[-16]
+                    offset = 0
+                    if self.isBitalino52:
+                        offset = -1
+                    batteryThreshold = decodedData[-2 + offset]
+                    battery = decodedData[-3 + offset] << 8 | decodedData[-4 + offset]
+                    A6 = decodedData[-5 + offset] << 8 | decodedData[-6 + offset]
+                    A5 = decodedData[-7 + offset] << 8 | decodedData[-8 + offset]
+                    A4 = decodedData[-9 + offset] << 8 | decodedData[-10 + offset]
+                    A3 = decodedData[-11 + offset] << 8 | decodedData[-12 + offset]
+                    A2 = decodedData[-13 + offset] << 8 | decodedData[-14 + offset]
+                    A1 = decodedData[-15 + offset] << 8 | decodedData[-16 + offset]
                     acquiredData = {}
                     acquiredData["analogChannels"] = [A1, A2, A3, A4, A5, A6]
                     acquiredData["battery"] = battery
